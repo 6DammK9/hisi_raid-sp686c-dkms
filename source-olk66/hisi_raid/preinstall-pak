@@ -1,0 +1,16 @@
+#!/bin/bash 
+system_arch=$(uname -m) 
+system_kernel=$(uname -r) 
+if [[ $system_arch != aarch64 ]]; then 
+   echo ERROR: fail to install this debian package beacause arch issue!!! 
+   exit 1 
+else 
+#	if [[ $system_kernel != 4.19.0-0.bpo.1-linx-security-arm64 ]]; then 
+#		echo This module was built on kernel !!! 
+#		echo Unpacking terminated!; 
+#		exit 1 
+#	else 
+    echo Unpacking preparing; 
+	exit 0 
+#	fi 
+fi 

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+driver_bin="hiraid.ko"
+# kernel=`uname -r`
+
+# Modified from RAID-B80121-Ubuntu24.04-hiraid-2.0.4.3-aarch64.deb > postrm
+
+for kernel in `ls -1 /lib/modules`; do
+	HIRAID_IPATH=/lib/modules/${kernel}/updates
+	
+	if [ ! -e $HIRAID_IPATH/$driver_bin ]; then
+		echo "File missing: ${HIRAID_IPATH}/{$driver_bin}"
+		continue;
+    fi;
+
+	rm -rf $HIRAID_IPATH;
+
+	echo "Removing driver from initramfs"
+	bootpart=/boot;
+	
+	depmod -v ${kernel} > /dev/null 2>&1;
+	#rmmod hiraid;
+
+ 	# Delete the "hiraid" line from /etc/initramfs-tools/modules file
+    mkinitramfs_modules=/etc/initramfs-tools/modules
+    sed -i '/hiraid/d' ${mkinitramfs_modules}
+
+	mkinitramfs -k -o ${bootpart}/initrd.img-${kernel} ${kernel} > /dev/null 2>&1;
+
+	rm -rf /etc/modules-load.d/hiraid.conf;
+done;
+
+echo "hiraid debian post uninstall Done."
+# postun ########################################################################

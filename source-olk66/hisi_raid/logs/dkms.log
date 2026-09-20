@@ -1,0 +1,25 @@
+Subsitude version name for dkms.conf for upcoming driver updates.
+DKMS add
+Creating symlink /var/lib/dkms/hiraid/2.1.0.1/source -> /usr/src/hiraid-2.1.0.1
+DKMS build. Ignore error message.
+Sign command: /usr/bin/kmodsign
+Signing key: /var/lib/shim-signed/mok/MOK.priv
+Public certificate (MOK): /var/lib/shim-signed/mok/MOK.der
+
+Building module:
+Cleaning build area...
+make -j96 KERNELRELEASE=6.8.0-139-generic -C /lib/modules/6.8.0-139-generic/build M=/usr/src/hiraid-2.1.0.1 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- modules....
+Signing module /var/lib/dkms/hiraid/2.1.0.1/build/hiraid.ko
+Cleaning build area...
+DKMS install. This will success.
+
+hiraid.ko.zst:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.8.0-139-generic/updates/dkms/
+depmod...
+hiraid/2.1.0.1, 6.8.0-139-generic, aarch64: installed
+Update initramfs
+update-initramfs: Generating /boot/initrd.img-6.8.0-139-generic

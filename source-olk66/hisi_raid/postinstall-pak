@@ -1,0 +1,36 @@
+#!/bin/bash
+
+driver_bin="hiraid.ko"
+
+# Modified from RAID-B80121-Ubuntu24.04-hiraid-2.0.4.3-aarch64.deb > postinst
+
+for kernel_ver in `ls /lib/modules`; do
+
+        # Skipped entire file operation.
+        HIRAID_IPATH=/lib/modules/${kernel_ver}/updates
+        if [ ! -e $HIRAID_IPATH/$driver_bin ]; then
+                echo "File missing: ${HIRAID_IPATH}/{$driver_bin}"
+                continue;
+        fi;
+
+        echo "Adding driver to initramfs"
+        bootpart=/boot;
+        depmod -v ${kernel_ver} > /dev/null 2>&1;
+        #insmod ${HIRAID_IPATH}/${driver_bin}
+
+        mkinitramfs_modules=/etc/initramfs-tools/modules
+        pattern=`grep -R "hiraid" ${mkinitramfs_modules}`
+        if [ $? -ne 0 ]; then
+                echo "hiraid" >> ${mkinitramfs_modules}
+        else
+                sed -e s/"$pattern"/hiraid/ ${mkinitramfs_modules} > /tmp/mkinitramfs_modules
+                mv /tmp/mkinitramfs_modules ${mkinitramfs_modules}
+        fi;
+
+        mkinitramfs -k -o ${bootpart}/initrd.img-${kernel_ver} ${kernel_ver}
+
+	echo "hiraid" >> /etc/modules-load.d/hiraid.conf;
+done;
+
+echo "hiraid debian post install Done."
+# postun ########################################################################

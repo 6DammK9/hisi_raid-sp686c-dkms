@@ -1,0 +1,20 @@
+DKMS make.log for hiraid-2.1.0.1 for kernel 6.8.0-139-generic (aarch64)
+Sun Sep 20 05:59:56 PM HKT 2026
+make: Entering directory '/usr/src/linux-headers-6.8.0-139-generic'
+  CC [M]  /usr/src/hiraid-2.1.0.1/hiraid_main.o
+/usr/src/hiraid-2.1.0.1/hiraid_main.c:659:6: warning: no previous prototype for ‘hiraid_io_recognition_init’ [-Wmissing-prototypes]
+  659 | void hiraid_io_recognition_init(struct hiraid_dev *hdev)
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/src/hiraid-2.1.0.1/hiraid_main.c:681:23: warning: no previous prototype for ‘hiraid_io_pick_stream’ [-Wmissing-prototypes]
+  681 | struct hiraid_stream *hiraid_io_pick_stream(struct hiraid_dev *hdev,
+      |                       ^~~~~~~~~~~~~~~~~~~~~
+/usr/src/hiraid-2.1.0.1/hiraid_main.c:4074:6: warning: no previous prototype for ‘scsi_ncq_prio_support’ [-Wmissing-prototypes]
+ 4074 | bool scsi_ncq_prio_support(struct scsi_device *sdev, struct hiraid_dev *hdev)
+      |      ^~~~~~~~~~~~~~~~~~~~~
+  LD [M]  /usr/src/hiraid-2.1.0.1/hiraid.o
+  MODPOST /usr/src/hiraid-2.1.0.1/Module.symvers
+  CC [M]  /usr/src/hiraid-2.1.0.1/hiraid.mod.o
+  LD [M]  /usr/src/hiraid-2.1.0.1/hiraid.ko
+  BTF [M] /usr/src/hiraid-2.1.0.1/hiraid.ko
+Skipping BTF generation for /usr/src/hiraid-2.1.0.1/hiraid.ko due to unavailability of vmlinux
+make: Leaving directory '/usr/src/linux-headers-6.8.0-139-generic'

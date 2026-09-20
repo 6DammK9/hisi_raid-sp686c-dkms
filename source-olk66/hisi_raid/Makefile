@@ -1,0 +1,9 @@
+#
+# Makefile for the hisi_raid drivers.
+#
+
+# obj-$(CONFIG_SCSI_HISI_RAID) += hiraid.o
+
+obj-m += hiraid.o
+
+hiraid-objs := hiraid_main.o
