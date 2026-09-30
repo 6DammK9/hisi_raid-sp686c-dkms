@@ -1,5 +1,7 @@
 # DKMS wrapper and Prebuilt packages for Huawei SP686C RAID card #
 
+- (260930) Update: It survived the kernel upgrade.
+
 ## Installation (build from source) ##
 
 - Perform [DKMS install](./source-olk66/readme.md#install-via-dkms) in page "mirror", in `tty2`.
@@ -40,6 +42,8 @@
 ![fastfetch.png](./fastfetch.png)
 
 ![lspci.png](./lspci.png)
+
+![rebuild.png](./rebuild.png)
 
 ## Extra: Installing Ubuntu 24.04 on the kunpeng920 server ##
 
